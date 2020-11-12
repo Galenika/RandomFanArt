@@ -21,12 +21,18 @@ namespace ConsoleApp1
         {
             HttpClient httpClient = new HttpClient();
             MultipartFormDataContent form = new MultipartFormDataContent();
-            form.Add(new StringContent("Random fanart of the day:" + Environment.NewLine + chosenFile.Name.Substring(0, chosenFile.Name.Length - 4)), "content");
+            form.Add(new StringContent("Random fanart: " + chosenFile.Name.Substring(0, chosenFile.Name.Length - 4)), "content");
             form.Add(new ByteArrayContent(File.ReadAllBytes(chosenFile.FullName)), "file", chosenFile.Name);
             HttpResponseMessage response = await httpClient.PostAsync($"https://discordapp.com/api/webhooks/768447672758566919/{Environment.GetEnvironmentVariable("wolfbros_token", EnvironmentVariableTarget.User)}", form);
-            response.EnsureSuccessStatusCode();
             httpClient.Dispose();
-            return response.Content.ReadAsStringAsync().Result;
+            try
+            {
+                return (await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException ex)
+            {
+                return $"{ex.Message}{Environment.NewLine}From: {ex.Source}";
+            }
         }
 
         static FileInfo ChooseFile()
