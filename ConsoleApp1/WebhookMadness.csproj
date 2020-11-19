@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CDDAB418-B247-4F97-B259-4368BA2A5CF7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LiS2_Fanart</RootNamespace>
-    <AssemblyName>LiS2_Fanart</AssemblyName>
+    <RootNamespace>Webhook_Madness</RootNamespace>
+    <AssemblyName>Webhook_Madness</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
