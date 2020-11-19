@@ -33,6 +33,22 @@ namespace WebhookMadness
 
                 }
             }
+            else
+            {
+                Task<string> postArt = PostImage(ChooseFile());
+                postArt.Wait();
+                using (StreamWriter sw = new StreamWriter("fanart_response.json"))
+                {
+                    sw.Write(postArt.Result);
+                }
+
+                Task<string> postMeme = PostImage();
+                postMeme.Wait();
+                using (StreamWriter sw = new StreamWriter("meme_response.json"))
+                {
+                    sw.Write(postMeme.Result);
+                }
+            }
         }
 
         private static async Task<string> PostImage(FileInfo chosenFile)
